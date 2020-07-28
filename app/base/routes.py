@@ -15,9 +15,8 @@ from flask_login import (
 from app import db, login_manager
 from app.base import blueprint
 from app.base.forms import LoginForm, CreateAccountForm
-from app.base.models import User
-
-from app.base.util import verify_pass
+from app.base.models import Users
+import bcrypt
 
 @blueprint.route('/')
 def route_default():
@@ -39,10 +38,10 @@ def login():
         password = request.form['password']
 
         # Locate user
-        user = User.query.filter_by(username=username).first()
+        user = Users.query.filter_by(username=username).first()
         
         # Check the password
-        if user and verify_pass( password, user.password):
+        if user and bcrypt.checkpw(password.encode(), user.password.encode()):
 
             login_user(user)
             return redirect(url_for('base_blueprint.route_default'))
@@ -64,17 +63,22 @@ def create_user():
         username  = request.form['username']
         email     = request.form['email'   ]
 
-        user = User.query.filter_by(username=username).first()
+        user = Users.query.filter_by(username=username).first()
         if user:
             return render_template( 'login/register.html', msg='Username already registered', form=create_account_form)
 
-        user = User.query.filter_by(email=email).first()
+        user = Users.query.filter_by(email=email).first()
         if user:
             return render_template( 'login/register.html', msg='Email already registered', form=create_account_form)
 
+        attrs = dict(request.form)
+        attrs['salt'] = bcrypt.gensalt().decode() 
+        attrs['is_admin'] = 0
+
         # else we can create the user
-        user = User(**request.form)
+        user = Users(**attrs)
         db.session.add(user)
+        print('Committed')
         db.session.commit()
 
         return render_template( 'login/register.html', success='User created please <a href="/login">login</a>', form=create_account_form)

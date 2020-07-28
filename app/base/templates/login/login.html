@@ -17,9 +17,8 @@
                   <span class="text-danger">{{ msg | safe }}</span>
                 {% else %}
                 <span>
-                  Use default credentials: test / pass
-                  <br />
-                  OR <a href={{ url_for('base_blueprint.create_user') }} >create your own user</a>
+                  Don't have an account?
+                  <a href={{ url_for('base_blueprint.create_user') }} >Sign up</a>
                 </span>
                 {% endif %}
 

@@ -5,20 +5,30 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from flask_login import UserMixin
-from sqlalchemy import Binary, Column, Integer, String
+from sqlalchemy import Binary, Column, Integer, String, DateTime
+from sqlalchemy.dialects.mysql import TINYINT
 
 from app import db, login_manager
+import bcrypt
 
-from app.base.util import hash_pass
+class Users(db.Model, UserMixin):
 
-class User(db.Model, UserMixin):
-
-    __tablename__ = 'User'
-
-    id = Column(Integer, primary_key=True)
-    username = Column(String, unique=True)
-    email = Column(String, unique=True)
-    password = Column(Binary)
+    id = Column(Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
+    username = Column(String(45), nullable=False, unique=True)
+    email = Column(String(255), nullable=False, unique=True)
+    salt = Column(String(255), nullable=False, unique=True)
+    password = Column(String(255))
+    first_name = Column(String(150))
+    last_name = Column(String(150))
+    last_ip = Column(String(45))
+    language = Column(String(20))
+    status = Column(TINYINT)
+    confirmed = Column(TINYINT)
+    date_created = Column(DateTime)
+    date_updated = Column(DateTime)
+    last_login = Column(DateTime)
+    remember_token = Column(String(255))
+    is_admin = Column(TINYINT, nullable=False)
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
@@ -29,10 +39,9 @@ class User(db.Model, UserMixin):
                 # the ,= unpack of a singleton fails PEP8 (travis flake8 test)
                 value = value[0]
 
-            if property == 'password':
-                value = hash_pass( value ) # we need bytes here (not plain str)
-                
             setattr(self, property, value)
+
+        self.password = bcrypt.hashpw(self.password.encode(), self.salt.encode()).decode() 
 
     def __repr__(self):
         return str(self.username)
@@ -40,10 +49,10 @@ class User(db.Model, UserMixin):
 
 @login_manager.user_loader
 def user_loader(id):
-    return User.query.filter_by(id=id).first()
+    return Users.query.filter_by(id=id).first()
 
 @login_manager.request_loader
 def request_loader(request):
     username = request.form.get('username')
-    user = User.query.filter_by(username=username).first()
+    user = Users.query.filter_by(username=username).first()
     return user if user else None

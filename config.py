@@ -13,8 +13,8 @@ class Config(object):
 
     SECRET_KEY = 'S3cretKey_7655'
 
-    # This will create a file in <app> FOLDER
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
+    # MySQL database URI
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:HeavenBlessesHardwork@localhost/hoteldb'
 
     # For 'in memory' database, please use:
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
@@ -38,13 +38,7 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
     # PostgreSQL database
-    SQLALCHEMY_DATABASE_URI = 'postgresql://{}:{}@{}:{}/{}'.format(
-        environ.get('APPSEED_DATABASE_USER', 'appseed'),
-        environ.get('APPSEED_DATABASE_PASSWORD', 'appseed'),
-        environ.get('APPSEED_DATABASE_HOST', 'db'),
-        environ.get('APPSEED_DATABASE_PORT', 5432),
-        environ.get('APPSEED_DATABASE_NAME', 'appseed')
-    )
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:HeavenBlessesHardwork@localhost/hoteldb'
 
 
 class DebugConfig(Config):
