@@ -43,13 +43,16 @@ class Users(db.Model, UserMixin):
 
         self.password = bcrypt.hashpw(self.password.encode(), self.salt.encode()).decode() 
 
+    def get_id(self):
+        return self.remember_token
+
     def __repr__(self):
         return str(self.username)
 
 
 @login_manager.user_loader
 def user_loader(id):
-    return Users.query.filter_by(id=id).first()
+    return Users.query.filter_by(remember_token=id).first()
 
 @login_manager.request_loader
 def request_loader(request):

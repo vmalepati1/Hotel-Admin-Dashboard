@@ -47,6 +47,11 @@
                     {{ form.password(placeholder="Password",class="form-control",type="password") }}
                   </div>
                 </div>
+				
+				<div class="form-group text-center">
+					{{ form.remember_me(value='n') }}
+					Remember me
+				</div>
 
                 <div class="text-center">
                   <button type="submit" name="login" class="btn btn-primary my-4">Sign in</button>

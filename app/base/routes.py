@@ -17,6 +17,7 @@ from app.base import blueprint
 from app.base.forms import LoginForm, CreateAccountForm
 from app.base.models import Users
 import bcrypt
+import uuid
 
 @blueprint.route('/')
 def route_default():
@@ -42,8 +43,7 @@ def login():
         
         # Check the password
         if user and bcrypt.checkpw(password.encode(), user.password.encode()):
-
-            login_user(user)
+            login_user(user, remember = ('remember_me' in request.form))
             return redirect(url_for('base_blueprint.route_default'))
 
         # Something (user or pass) is not ok
@@ -59,30 +59,32 @@ def create_user():
     login_form = LoginForm(request.form)
     create_account_form = CreateAccountForm(request.form)
     if 'register' in request.form:
+        if create_account_form.validate_on_submit():
+            username  = request.form['username']
+            email     = request.form['email'   ]
 
-        username  = request.form['username']
-        email     = request.form['email'   ]
+            user = Users.query.filter_by(username=username).first()
+            if user:
+                return render_template( 'login/register.html', msg='Username already registered', form=create_account_form)
 
-        user = Users.query.filter_by(username=username).first()
-        if user:
-            return render_template( 'login/register.html', msg='Username already registered', form=create_account_form)
+            user = Users.query.filter_by(email=email).first()
+            if user:
+                return render_template( 'login/register.html', msg='Email already registered', form=create_account_form)
 
-        user = Users.query.filter_by(email=email).first()
-        if user:
-            return render_template( 'login/register.html', msg='Email already registered', form=create_account_form)
+            attrs = dict(request.form)
+            attrs['salt'] = bcrypt.gensalt().decode() 
+            attrs['is_admin'] = 0
+            attrs['remember_token'] = str(uuid.uuid4())
 
-        attrs = dict(request.form)
-        attrs['salt'] = bcrypt.gensalt().decode() 
-        attrs['is_admin'] = 0
+            # else we can create the user
+            user = Users(**attrs)
+            db.session.add(user)
+            print('Committed')
+            db.session.commit()
 
-        # else we can create the user
-        user = Users(**attrs)
-        db.session.add(user)
-        print('Committed')
-        db.session.commit()
-
-        return render_template( 'login/register.html', success='User created please <a href="/login">login</a>', form=create_account_form)
-
+            return render_template( 'login/register.html', success='User created please <a href="/login">login</a>', form=create_account_form)
+        else:
+            return render_template( 'login/register.html', msg='Please enter a valid email', form=create_account_form)
     else:
         return render_template( 'login/register.html', form=create_account_form)
 
