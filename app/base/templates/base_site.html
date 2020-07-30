@@ -45,14 +45,6 @@
 
 <body class="">
 
-  {% include "site_template/sidebar.html" %}
-
-  <div class="main-content">
-
-    {% block content %}{% endblock content %}
-
-  </div>
-
   {% block javascripts %}
     <!-- Core -->
     <script src="{{ url_for('static', filename='assets/js/plugins/jquery/dist/jquery.min.js') }}"></script>
@@ -61,11 +53,19 @@
     <!-- Optional JS -->
     <script src="{{ url_for('static', filename='assets/js/plugins/chart.js/dist/Chart.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/plugins/chart.js/dist/Chart.extension.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/plugins/moment-js/moment.min.js') }}"></script>
     
     <!-- Argon JS -->
     <script src="{{ url_for('static', filename='assets/js/argon-dashboard.min.js') }}"></script>
   {% endblock javascripts %}
 
+  {% include "site_template/sidebar.html" %}
+
+  <div class="main-content">
+
+    {% block content %}{% endblock content %}
+
+  </div>
 </body>
 
 </html>

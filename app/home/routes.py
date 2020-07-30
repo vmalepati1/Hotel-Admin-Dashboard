@@ -4,25 +4,37 @@ License: MIT
 Copyright (c) 2019 - present AppSeed.us
 """
 
+from app import db
 from app.home import blueprint
-from flask import render_template, redirect, url_for
+from app.home.forms import EditProfileForm
+from flask import render_template, redirect, url_for, request
 from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
+import requests
+import json
 
 @blueprint.route('/index')
 @login_required
 def index():
-    
-    if not current_user.is_authenticated:
-        return redirect(url_for('base_blueprint.login'))
+    return redirect(url_for('home_blueprint.edit_profile'))
 
-    return render_template('profile.html')
-
-@blueprint.route('/profile')
+@blueprint.route('/profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    return render_template('profile.html')
+    edit_form = EditProfileForm(request.form)
+    
+    if 'save' in request.form and edit_form.validate():
+        current_user.username = request.form['username']
+        current_user.email = request.form['email']
+        current_user.first_name = request.form['first_name']
+        current_user.last_name = request.form['last_name']
+
+        db.session.commit()
+        
+        return render_template('profile.html', success='Changes successfully saved!', form=edit_form)
+    else:
+        return render_template('profile.html', form=edit_form)
     
 @blueprint.route('/<template>')
 def route_template(template):

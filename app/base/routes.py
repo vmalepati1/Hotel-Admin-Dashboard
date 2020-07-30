@@ -18,6 +18,7 @@ from app.base.forms import LoginForm, CreateAccountForm
 from app.base.models import Users
 import bcrypt
 import uuid
+import datetime
 
 @blueprint.route('/')
 def route_default():
@@ -32,7 +33,7 @@ def route_errors(error):
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm(request.form)
-    if 'login' in request.form:
+    if 'login' in request.form and login_form.validate():
         
         # read form data
         username = request.form['username']
@@ -43,6 +44,10 @@ def login():
         
         # Check the password
         if user and bcrypt.checkpw(password.encode(), user.password.encode()):
+            user.last_login = datetime.datetime.utcnow()
+            user.last_ip = request.environ['REMOTE_ADDR']
+            db.session.commit()
+            
             login_user(user, remember = ('remember_me' in request.form))
             return redirect(url_for('base_blueprint.route_default'))
 
@@ -74,7 +79,13 @@ def create_user():
         attrs['salt'] = bcrypt.gensalt().decode() 
         attrs['is_admin'] = 0
         attrs['remember_token'] = str(uuid.uuid4())
-
+        attrs['first_name'] = 'Lucky'
+        attrs['last_name'] = 'Jesse'
+        
+        current_timestamp = datetime.datetime.utcnow()
+        attrs['date_created'] = current_timestamp
+        attrs['date_updated'] = current_timestamp
+        
         # else we can create the user
         user = Users(**attrs)
         db.session.add(user)

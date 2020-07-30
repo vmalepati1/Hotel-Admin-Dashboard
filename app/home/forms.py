@@ -6,4 +6,5 @@ class EditProfileForm(FlaskForm):
 
     username = TextField    ('Username', [Length(max=45)])
     email = TextField       ('Email address', [Email(), Length(max=255)])
-    first_name = TextField  ('First name', )
+    first_name = TextField  ('First name', [Length(max=150)])
+    last_name = TextField  ('Last name', [Length(max=150)])
