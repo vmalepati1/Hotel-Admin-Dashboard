@@ -17,8 +17,13 @@ def index():
     if not current_user.is_authenticated:
         return redirect(url_for('base_blueprint.login'))
 
-    return render_template('index.html')
+    return render_template('profile.html')
 
+@blueprint.route('/profile')
+@login_required
+def edit_profile():
+    return render_template('profile.html')
+    
 @blueprint.route('/<template>')
 def route_template(template):
 

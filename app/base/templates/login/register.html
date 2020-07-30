@@ -34,6 +34,8 @@
 
               {% else %}
                 <form role="form" method="post" action="">
+				
+				  {% from "site_template/_formhelpers.html" import render_errors %}
 
                   {{ form.hidden_tag() }}
 
@@ -44,6 +46,7 @@
                       </div>
                       {{ form.username(placeholder="Username",class="form-control") }}
                     </div>
+					{{ render_errors(form.username) }}
                   </div>
                   <div class="form-group mb-3">
                     <div class="input-group input-group-alternative">
@@ -52,6 +55,7 @@
                       </div>
                       {{ form.email(placeholder="Email",class="form-control") }}
                     </div>
+					{{ render_errors(form.email) }}
                   </div>
                   <div class="form-group">
                     <div class="input-group input-group-alternative">
@@ -60,8 +64,9 @@
                       </div>
                       {{ form.password(placeholder="Password",class="form-control",type="password") }}
                     </div>
+					{{ render_errors(form.password) }}
                   </div>
-
+				 
                   <div class="text-center">
                     <button type="submit" name="register" class="btn btn-primary my-4">Register</button>
                   </div>
