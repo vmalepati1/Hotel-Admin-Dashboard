@@ -10,7 +10,33 @@
 
   {% include "site_template/navigation.html" %}
 
-  {% include "site_template/top-stats.html" %}
+  <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Card stats -->
+          <div class="row justify-content-center">
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Hotels</h5>
+                      <span class="h2 font-weight-bold mb-0">{{ num_hotels }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                        <i class="ni ni-building"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <div class="container-fluid mt--7">
     
@@ -19,7 +45,7 @@
           <div class="col">
             <div class="card shadow">
               <div class="card-header bg-transparent">
-                <h3 class="mb-0">Icons</h3>
+                <h3 class="mb-0">Associated hotels</h3>
               </div>
               <div class="card-body">
                 <div class="row icon-examples">

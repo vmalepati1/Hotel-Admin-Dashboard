@@ -7,6 +7,7 @@ Copyright (c) 2019 - present AppSeed.us
 from app import db
 from app.home import blueprint
 from app.home.forms import EditProfileForm
+from app.home.models import Hotel
 from flask import render_template, redirect, url_for, request
 from flask_login import login_required, current_user
 from app import login_manager
@@ -35,6 +36,14 @@ def edit_profile():
         return render_template('profile.html', success='Changes successfully saved!', form=edit_form)
     else:
         return render_template('profile.html', form=edit_form)
+
+@blueprint.route('/hotels_select')
+@login_required
+def select_hotel():
+    hotels = Hotel.query.filter_by(author=current_user.id).all()
+    num_hotels = len(hotels)
+
+    return render_template('hotels_select.html', hotels=hotels, num_hotels=num_hotels)
     
 @blueprint.route('/<template>')
 def route_template(template):
