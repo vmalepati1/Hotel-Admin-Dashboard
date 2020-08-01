@@ -37,11 +37,22 @@ def edit_profile():
     else:
         return render_template('profile.html', form=edit_form)
 
-@blueprint.route('/hotels_select')
+@blueprint.route('/hotels_select',  methods=['GET', 'POST'])
 @login_required
 def select_hotel():
-    hotels = Hotel.query.filter_by(author=current_user.id).all()
+    if current_user.is_admin:
+        hotels = Hotel.query.all()
+    else:
+        hotels = Hotel.query.filter_by(author=current_user.id).all()
+        
     num_hotels = len(hotels)
+
+    if request.method == "POST":
+        if 'delete' in request.form:
+            hotel_to_delete = Hotel.query.filter_by(seq_id=request.form['delete']).first()
+
+            print(hotel_to_delete.seq_id)
+        return render_template("hotels_select.html", hotels=hotels, num_hotels=num_hotels)
 
     return render_template('hotels_select.html', hotels=hotels, num_hotels=num_hotels)
     
