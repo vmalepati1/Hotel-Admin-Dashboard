@@ -96,11 +96,13 @@
                      <a href="#!" class="btn btn-sm btn-primary">Settings</a>
                   </div>
                </div>
-			   <div class="text-muted text-center">
-                {% if success %}
-                  <span class="text-success">{{ success | safe }}</span>
-                {% endif %}
-              </div>
+				<div class="text-muted text-center">
+					{% if success %}
+					  <span class="text-success">{{ success | safe }}</span>
+					{% elif msg %}
+						<span class="text-danger">{{ msg | safe }}</span>
+					{% endif %}
+				</div>
             </div>
             <div class="card-body">
                <form method="post" action="">

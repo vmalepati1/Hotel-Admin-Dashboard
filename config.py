@@ -28,6 +28,9 @@ class Config(object):
     # DEFAULT_THEME = "themes/dark"
     DEFAULT_THEME = None
 
+    MAX_CONTENT_LENGTH = 1024 * 1024
+    UPLOAD_EXTENSIONS = ['.jpg', '.png', '.gif']
+    UPLOAD_PATH = 'app/base/static/assets/img'
 
 class ProductionConfig(Config):
     DEBUG = False
@@ -36,10 +39,6 @@ class ProductionConfig(Config):
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_DURATION = 3600
-
-    # PostgreSQL database
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:HeavenBlessesHardwork@localhost/hoteldb'
-
 
 class DebugConfig(Config):
     DEBUG = True

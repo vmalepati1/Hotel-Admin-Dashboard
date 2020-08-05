@@ -1,6 +1,6 @@
 {% extends "base_site.html" %}
 
-{% block title %} Icons {% endblock title %}
+{% block title %} Select Hotel {% endblock title %}
 
 {% block stylesheets %}
   {{ super() }}
@@ -69,7 +69,11 @@
 					{% for hotel in hotels %}
 						<div class="col-lg-3 col-md-6 mb-4" style="display: flex;">
 							<div class="card" style="align-items: stretch;">
-							  <img class="card-img-top" src="{{ hotel.cover_image }}" alt="Card image cap" style="max-height: 150px; width: auto;">
+							  {% if hotel.cover_image %}
+								<img class="card-img-top" src="{{ hotel.cover_image }}" alt="Image error" style="height: 150px; width: auto;">
+							  {% else %}
+								<img class="card-img-top" src="http://127.0.0.1:5000/static/assets/img/theme/empty-img.jpg" alt="Image error" style="height: 150px; width: auto;">
+							  {% endif %}
 
 							  <div class="card-body">
 								<h5 class="card-title">{{ hotel.name }}</h5>

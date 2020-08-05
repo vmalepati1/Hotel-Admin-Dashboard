@@ -1,0 +1,256 @@
+{% extends "base_site.html" %}
+{% block title %} Edit Hotel {% endblock title %}
+{% block stylesheets %}
+{{ super() }}
+{% endblock stylesheets %}
+{% block content %}
+{% include "site_template/navigation.html" %}
+<!-- Header -->
+<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+   <div class="container-fluid">
+      <div class="header-body">
+         <!-- Card stats -->
+         <div class="row justify-content-center">
+            <div class="card" style="width: 16rem;">
+               {% if hotel.cover_image %}
+               <img class="card-img-top" src="{{ hotel.cover_image }}" alt="Image error">
+               {% else %}
+               <img class="card-img-top" src="http://127.0.0.1:5000/static/assets/img/theme/empty-img.jpg" alt="Image error">
+               {% endif %}
+               <h5 class="card-title mt-3 text-center">{{ hotel.name }}</h5>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+   <div class="row justify-content-center">
+      <div class="col-xl-8 order-xl-1">
+         <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+               <div class="nav-wrapper">
+                  <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                     <li class="nav-item">
+                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-bullet-list-67 mr-2"></i>Information</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="ni ni-album-2 mr-2"></i>Gallery</a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="card-body">
+               <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
+                     <form method="post" action="">
+                        {% from "site_template/_formhelpers.html" import render_errors %}
+						
+						{{ form.hidden_tag() }}
+						
+						<div class="text-muted text-center">
+							{% if success %}
+							  <span class="text-success">{{ success | safe }}</span>
+							{% elif msg %}
+								<span class="text-danger">{{ msg | safe }}</span>
+							{% endif %}
+						</div>
+							
+                        <h6 class="heading-small text-muted mb-4">Hotel information - {{ hotel.seq_id }}</h6>
+                        <div class="pl-lg-4">
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.id.label }}</label>
+                                    {{ form.id(value=hotel.id, class="form-control") }}
+                                    {{ render_errors(form.id) }}
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.order_id.label }}</label>
+                                    {{ form.order_id(value=hotel.order_id, class="form-control") }}
+                                    {{ render_errors(form.order_id) }}
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.name.label }}</label>
+                                    {{ form.name(value=hotel.name, class="form-control") }}
+                                    {{ render_errors(form.name) }}
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.rating.label }}</label>
+                                    {{ form.rating(value=hotel.rating, class="form-control") }}
+                                    {{ render_errors(form.rating) }}
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="map" style="height: 400px; width: 100%;"></div>
+                           <script>
+                              // Initialize and add the map
+                              function initMap() {
+                                // The location of Uluru
+                                var uluru = {lat: -25.344, lng: 131.036};
+                                // The map, centered at Uluru
+                                var map = new google.maps.Map(
+                              	  document.getElementById('map'), {zoom: 4, center: uluru});
+                                // The marker, positioned at Uluru
+                                var marker = new google.maps.Marker({position: uluru, map: map});
+                              }
+                           </script>
+                           <!--Load the API from the specified URL
+                              * The async attribute allows the browser to render the page while the API loads
+                              * The key parameter will contain your own API key (which is not needed for this tutorial)
+                              * The callback parameter executes the initMap() function
+                              -->
+                           <script defer
+                              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpmcncxPyxKBEyqypP4gcqaBB_crhLhgo&callback=initMap"></script>
+                           <div class="form-group mt-3">
+                              <label class="form-control-label">{{ form.address.label }}</label>
+                              {{ form.address(value=hotel.address, class="form-control") }}
+                              {{ render_errors(form.address) }}
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.zip.label }}</label>
+                                    {{ form.zip(value=hotel.zip, class="form-control") }}
+                                    {{ render_errors(form.zip) }}
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.town.label }}</label>
+                                    {{ form.town(value=hotel.town, class="form-control") }}
+                                    {{ render_errors(form.town) }}
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.sidecode.label }}</label>
+                                    {{ form.sidecode(value=hotel.sidecode, class="form-control") }}
+                                    {{ render_errors(form.sidecode) }}
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.country.label }}</label>
+                                    {{ form.country(value=hotel.country, class="form-control") }}
+                                    {{ render_errors(form.country) }}
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">Hotel full description</label>
+                              <textarea class="form-control">{{ hotel.hotel_description }}</textarea>
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">{{ form.hotel_smalldesc.label }}</label>
+                              {{ form.hotel_smalldesc(value=hotel.hotel_smalldesc, class="form-control") }}
+                              {{ render_errors(form.hotel_smalldesc) }}
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">Hotel services</label>
+                              <textarea class="form-control">{{ hotel.hotel_services }}</textarea>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.arrival.label }}</label>
+                                    {{ form.arrival(value=hotel.arrival, class="form-control") }}
+                                    {{ render_errors(form.arrival) }}
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.departure.label }}</label>
+                                    {{ form.departure(value=hotel.departure, class="form-control") }}
+                                    {{ render_errors(form.departure) }}
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">{{ form.location.label }}</label>
+                              {{ form.location(value=hotel.location, class="form-control") }}
+                              {{ render_errors(form.location) }}
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">{{ form.website.label }}</label>
+                              {{ form.website(value=hotel.website, class="form-control") }}
+                              {{ render_errors(form.website) }}
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">{{ form.phone.label }}</label>
+                              {{ form.phone(value=hotel.phone, class="form-control") }}
+                              {{ render_errors(form.phone) }}
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">Main mailing list</label>
+                              <textarea class="form-control">{{ hotel.mails1 }}</textarea>
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">Secondary mailing list</label>
+                              <textarea class="form-control">{{ hotel.mails2 }}</textarea>
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">Tertiary mailing list</label>
+                              <textarea class="form-control">{{ hotel.mails3 }}</textarea>
+                           </div>
+                           <div class="row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.numero_stelle.label }}</label>
+                                    {{ form.numero_stelle(value=hotel.numero_stelle, class="form-control") }}
+                                    {{ render_errors(form.numero_stelle) }}
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">{{ form.tipologia_struttura.label }}</label>
+                                    {{ form.tipologia_struttura(value=hotel.tipologia_struttura, class="form-control") }}
+                                    {{ render_errors(form.tipologia_struttura) }}
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">Cover image</label>
+                              <input class="form-control" type="file"
+                                 name="cover_image_file"
+                                 accept="image/*">
+                              </input>
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">Additional rules</label>
+                              <textarea class="form-control">{{ hotel.additional_rules }}</textarea>
+                           </div>
+                           <div class="form-group">
+                              <label class="form-control-label">Services (json)</label>
+                              <textarea class="form-control">{{ hotel.services }}</textarea>
+                           </div>
+						    <div class="text-center">
+								<button type="submit" name="save" class="btn btn-primary my-4">Save edits</button>
+							</div>
+                        </div>
+                     </form>
+                  </div>
+                  <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
+                     <p class="description">Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% include "site_template/footer.html" %}
+</div>
+{% endblock content %}
+{% block javascripts %}
+{{ super()}}
+{% endblock javascripts %}
