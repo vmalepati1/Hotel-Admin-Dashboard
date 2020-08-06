@@ -1,5 +1,5 @@
 {% extends "base_site.html" %}
-{% block title %} Edit Hotel {% endblock title %}
+{% block title %} {{ _('Edit Hotel') }} {% endblock title %}
 {% block stylesheets %}
 {{ super() }}
 {% endblock stylesheets %}
@@ -33,10 +33,10 @@
                <div class="nav-wrapper" id="myTab">
                   <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                      <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-bullet-list-67 mr-2"></i>Information</a>
+                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-bullet-list-67 mr-2"></i>{{ _('Information') }}</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="ni ni-album-2 mr-2"></i>Gallery</a>
+                        <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="ni ni-album-2 mr-2"></i>{{ _('Gallery') }}</a>
                      </li>
                   </ul>
                </div>
@@ -55,7 +55,7 @@
 							{% endif %}
 						</div>
 							
-                        <h6 class="heading-small text-muted mb-4">Hotel information - {{ hotel.seq_id }}</h6>
+                        <h6 class="heading-small text-muted mb-4">{{ _("Hotel information - %(id)d", id=hotel.seq_id) }}</h6>
                         <div class="pl-lg-4">
                            <div class="row">
                               <div class="col-lg-6">
@@ -151,7 +151,7 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="form-control-label">Hotel full description</label>
+                              <label class="form-control-label">{{ _('Hotel full description') }}</label>
                               <textarea class="form-control" name="hotel_description">{{ hotel.hotel_description }}</textarea>
                            </div>
                            <div class="form-group">
@@ -160,7 +160,7 @@
                               {{ render_errors(form.hotel_smalldesc) }}
                            </div>
                            <div class="form-group">
-                              <label class="form-control-label">Hotel services</label>
+                              <label class="form-control-label">{{ _('Hotel services') }}</label>
                               <textarea class="form-control" name="hotel_services">{{ hotel.hotel_services }}</textarea>
                            </div>
                            <div class="row">
@@ -195,15 +195,15 @@
                               {{ render_errors(form.phone) }}
                            </div>
                            <div class="form-group">
-                              <label class="form-control-label">Main mailing list</label>
+                              <label class="form-control-label">{{ _('Main mailing list') }}</label>
                               <textarea class="form-control" name="mails1" >{{ hotel.mails1 }}</textarea>
                            </div>
                            <div class="form-group">
-                              <label class="form-control-label">Secondary mailing list</label>
+                              <label class="form-control-label">{{ _('Secondary mailing list') }}</label>
                               <textarea class="form-control" name="mails2">{{ hotel.mails2 }}</textarea>
                            </div>
                            <div class="form-group">
-                              <label class="form-control-label">Tertiary mailing list</label>
+                              <label class="form-control-label">{{ _('Tertiary mailing list') }}</label>
                               <textarea class="form-control" name="mails3">{{ hotel.mails3 }}</textarea>
                            </div>
                            <div class="row">
@@ -223,22 +223,22 @@
                               </div>
                            </div>
                            <div class="form-group">
-                              <label class="form-control-label">Cover image</label>
+                              <label class="form-control-label">{{ _('Cover image') }}</label>
                               <input class="form-control" type="file"
                                  name="cover_image_file"
                                  accept="image/x-png,image/gif,image/jpeg">
                               </input>
                            </div>
                            <div class="form-group">
-                              <label class="form-control-label">Additional rules</label>
+                              <label class="form-control-label">{{ _('Additional rules') }}</label>
                               <textarea class="form-control" name="additional_rules">{{ hotel.additional_rules }}</textarea>
                            </div>
                            <div class="form-group">
-                              <label class="form-control-label">Services (json)</label>
+                              <label class="form-control-label">{{ _('Services (json)') }}</label>
                               <textarea class="form-control" name="services">{{ hotel.services }}</textarea>
                            </div>
 						    <div class="text-center">
-								<button type="submit" name="save" class="btn btn-primary my-4">Save edits</button>
+								<button type="submit" name="save" class="btn btn-primary my-4">{{ _('Save edits') }}</button>
 							</div>
                         </div>
                      </form>
@@ -254,7 +254,7 @@
 						</div>
 						
 						<div class="form-group">
-                              <label class="form-control-label">Upload image</label>
+                              <label class="form-control-label">{{ _('Upload image') }}</label>
                               <input class="form-control" type="file"
                                  name="gallery_image_file"
                                  accept="image/x-png,image/gif,image/jpeg">
@@ -262,7 +262,7 @@
                         </div>
 						<button name="add_image" class="btn btn-icon btn-primary btn-block mb-4" type="submit" style="align-items: stretch;">
 							<span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-							<span class="btn-inner--text">Add image</span>
+							<span class="btn-inner--text">{{ _('Add image') }}</span>
 						</button>
 					 </form>
 						<div class="row text-center text-lg-left">

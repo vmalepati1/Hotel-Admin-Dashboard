@@ -34,6 +34,8 @@ class Config(object):
     UPLOAD_FILE_PATH = 'app/base/static/assets/img/uploads'
     UPLOAD_STATIC_FOLDER_PATH = 'assets/img/uploads'
 
+    LANGUAGES = ['en', 'it']
+
 class ProductionConfig(Config):
     DEBUG = False
 

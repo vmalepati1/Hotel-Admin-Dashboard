@@ -1,4 +1,19 @@
-
+  <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+	 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+		<div class="modal-content">
+		   <div class="modal-header">
+			  <h4 class="modal-title" id="modal-title-default">{{ _('Product information') }}</h4>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">×</span>
+			  </button>
+		   </div>
+		   <div class="modal-body">
+			  <p>{{ _('This is a hotel administration dashboard meant for managing your hotel information and photos. You can edit your user profile, manage your hotels, or logout.') }}</p>
+		   </div>
+		</div>
+	 </div>
+  </div>
+	  
   <!-- Sidenav -->
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
@@ -74,12 +89,12 @@
         <ul class="navbar-nav">
 		  <li class="nav-item">
             <a class="nav-link" href="/profile">
-              <i class="ni ni-single-02 text-yellow"></i> User profile
+              <i class="ni ni-single-02 text-yellow"></i> {{ _('User profile') }}
             </a>
           </li>
           <li class="nav-item">
               <a class="nav-link " href="/hotels_select">
-                <i class="ni ni-building text-primary"></i> Your hotels
+                <i class="ni ni-building text-primary"></i> {{ _('Your hotels') }}
               </a>
           </li>          
 
@@ -87,7 +102,7 @@
 
             <li class="nav-item">
               <a class="nav-link" href={{ url_for('base_blueprint.logout') }}>
-                <i class="ni ni-user-run text-red"></i> Logout
+                <i class="ni ni-user-run text-red"></i> {{ _('Logout') }}
               </a>
             </li>
 
@@ -97,34 +112,19 @@
         <!-- Divider -->
         <hr class="my-3">
         <!-- Heading -->
-        <h6 class="navbar-heading text-muted">Support</h6>
+        <h6 class="navbar-heading text-muted">{{ _('Support') }}</h6>
         <!-- Navigation -->
         <ul class="navbar-nav mb-md-3">
 
           <li class="nav-item">
-              <a class="nav-link" href="https://appseed.us/admin-dashboards/flask-boilerplate-dashboard-argon">
-                <i class="ni ni-book-bookmark"></i> Product Information
+              <a class="nav-link" data-toggle="modal" data-target="#modal-default">
+                <i class="ni ni-book-bookmark"></i> {{ _('Product Information') }}
               </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/app-generator/flask-boilerplate-dashboard-argon">
-              <i class="ni ni-ui-04"></i> Source Code
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://docs.appseed.us/admin-dashboards/flask-boilerplate-dashboard-argon/">
-              <i class="ni ni-book-bookmark"></i> Documentation
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-              <i class="ni ni-books"></i> Argon Design Docs
-            </a>
           </li>
 
         </ul>
       </div>
     </div>
   </nav>
+
 

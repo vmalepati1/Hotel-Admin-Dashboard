@@ -4,19 +4,27 @@ License: MIT
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from flask import Flask, url_for
+from flask import Flask, url_for, request
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from logging import basicConfig, DEBUG, getLogger, StreamHandler
 from os import path
-
+from flask_babel import Babel
+from config import Config
+from flask_babel import lazy_gettext as _l
+from flask_login import current_user
+    
 db = SQLAlchemy()
 login_manager = LoginManager()
+babel = Babel()
 
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
+    babel.init_app(app)
+
+    login_manager.login_message = _l('Please log in to access this page.')
 
 def register_blueprints(app):
     for module_name in ('base', 'home'):
@@ -70,6 +78,15 @@ def apply_themes(app):
                 if path.isfile(path.join(app.static_folder, theme_file)):
                     values['filename'] = theme_file
         return url_for(endpoint, **values)
+
+@babel.localeselector
+def get_locale():
+    locale = request.accept_languages.best_match(Config.LANGUAGES)
+    
+    current_user.language = str(locale)
+    db.session.commit()
+    
+    return locale
 
 def create_app(config, selenium=False):
     app = Flask(__name__, static_folder='base/static')

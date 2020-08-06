@@ -1,5 +1,5 @@
 {% extends "base_site.html" %}
-{% block title %} Profile {% endblock title %}
+{% block title %} {{ _('Profile') }} {% endblock title %}
 {% block stylesheets %}
 {{ super() }}
 {% endblock stylesheets %}
@@ -13,12 +13,11 @@
    <div class="container-fluid d-flex align-items-center">
       <div class="row">
          <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello {{ current_user.username }}</h1>
+            <h1 class="display-2 text-white">{{ _('Hello %(username)s', username=current_user.username) }}</h1>
             <p class="text-white mt-0 mb-5">
-               This is your profile page. 
-               You can edit your details and see the progress you have made with your work.
+               {{ _('This is your profile page. You can edit your details and see the progress you have made with your work.') }}
             </p>
-            <a href="#!" class="btn btn-info">Edit profile</a>
+            <a href="#!" class="btn btn-info">{{ _('Edit profile') }}</a>
          </div>
       </div>
    </div>
@@ -36,7 +35,7 @@
                         <div class="card-body">
                            <div class="row">
                               <div class="col">
-                                 <h5 class="card-title text-uppercase text-muted mb-0">Last login</h5>
+                                 <h5 class="card-title text-uppercase text-muted mb-0">{{ _('Last login') }}</h5>
                                  <span class="h2 font-weight-bold mb-0">{{ momentjs(current_user.last_login).calendar() }}</span>
                               </div>
                               <div class="col-auto">
@@ -57,11 +56,11 @@
                         <div class="card-body">
                            <div class="row">
                               <div class="col">
-                                 <h5 class="card-title text-uppercase text-muted mb-0">Superuser</h5>
+                                 <h5 class="card-title text-uppercase text-muted mb-0">{{ _('Superuser') }}</h5>
 								 {% if current_user.is_admin %}
-									<span class="h2 font-weight-bold text-success mb-0">Enabled</span>
+									<span class="h2 font-weight-bold text-success mb-0">{{ _('Enabled') }}</span>
 								 {% else %}
-									<span class="h2 font-weight-bold text-danger mb-0">Disabled</span>
+									<span class="h2 font-weight-bold text-danger mb-0">{{ _('Disabled') }}</span>
 								 {% endif %}
                               </div>
                               <div class="col-auto">
@@ -90,10 +89,10 @@
             <div class="card-header bg-white border-0">
                <div class="row align-items-center">
                   <div class="col-8">
-                     <h3 class="mb-0">My account</h3>
+                     <h3 class="mb-0">{{ _('My account') }}</h3>
                   </div>
                   <div class="col-4 text-right">
-                     <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                     <a href="#!" class="btn btn-sm btn-primary">{{ _('Settings') }}</a>
                   </div>
                </div>
 				<div class="text-muted text-center">
@@ -110,9 +109,9 @@
 
                   {{ form.hidden_tag() }}
 				  
-                  <h6 class="heading-small text-muted mb-4">User information - {{ current_user.id }}</h6>
+                  <h6 class="heading-small text-muted mb-4">{{ _('User information - %(id)d', id=current_user.id) }}</h6>
                   <div class="form-group">
-					 <label class="form-control-label" for="input-username">Username</label>
+					 <label class="form-control-label" for="input-username">{{ _('Username') }}</label>
 					 <div class="input-group input-group-alternative">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-single-02"></i></span>
@@ -122,7 +121,7 @@
 					{{ render_errors(form.username) }}
                   </div>
                   <div class="form-group">
-					 <label class="form-control-label" for="input-email">Email address</label>
+					 <label class="form-control-label" for="input-email">{{ _('Email address') }}</label>
 					 <div class="input-group input-group-alternative">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
@@ -132,7 +131,7 @@
 					{{ render_errors(form.email) }}
                   </div>
                   <div class="form-group">
-                     <label class="form-control-label" for="input-first-name">First name</label>
+                     <label class="form-control-label" for="input-first-name">{{ _('First name') }}</label>
 					 <div class="input-group input-group-alternative">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
@@ -142,7 +141,7 @@
 					{{ render_errors(form.first_name) }}
                   </div>
                   <div class="form-group">
-                     <label class="form-control-label" for="input-last-name">Last name</label>
+                     <label class="form-control-label" for="input-last-name">{{ _('Last name') }}</label>
 					 <div class="input-group input-group-alternative">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
@@ -151,9 +150,10 @@
                     </div>
 					{{ render_errors(form.last_name) }}
                   </div>
+				  <!--
                   <div class="form-group">
                      <span>
-                     <label class="form-control-label" for="exampleFormControlSelect1">Language</label>
+                     <label class="form-control-label" for="exampleFormControlSelect1">{{ _('Language') }}</label>
                      <i class="ni ni-world-2 align-middle"></i>
                      </span>
                      <select class="form-control" id="exampleFormControlSelect1">
@@ -164,6 +164,7 @@
                         <option>5</option>
                      </select>
                   </div>
+				  -->
                   <div class="text-center">
                      <button type="submit" name="save" class="btn btn-primary my-4">Save edits</button>
                   </div>

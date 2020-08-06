@@ -1,0 +1,418 @@
+# Italian translations for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-08-06 18:55-0400\n"
+"PO-Revision-Date: 2020-08-06 18:05-0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: it\n"
+"Language-Team: it <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: app/__init__.py:27
+msgid "Please log in to access this page."
+msgstr "Effettua il login per accedere a questa pagina."
+
+#: app/base/forms.py:15 app/base/forms.py:20
+#: app/base/templates/login/login.html:41
+#: app/base/templates/login/register.html:47 app/home/forms.py:9
+#: app/home/templates/profile.html:114
+msgid "Username"
+msgstr "Nome utente"
+
+#: app/base/forms.py:16 app/base/forms.py:22
+#: app/base/templates/login/login.html:50
+#: app/base/templates/login/register.html:65
+msgid "Password"
+msgstr "Parola d'ordine"
+
+#: app/base/forms.py:17 app/base/templates/login/login.html:57
+msgid "Remember me"
+msgstr "Ricordati di me"
+
+#: app/base/forms.py:21 app/base/templates/login/register.html:56
+msgid "Email"
+msgstr "E-mail"
+
+#: app/base/routes.py:55
+msgid "Wrong user or password"
+msgstr "Utente o password errati"
+
+#: app/base/routes.py:72
+msgid "Username already registered"
+msgstr "Nome utente già registrato"
+
+#: app/base/routes.py:76
+msgid "Email already registered"
+msgstr "Email già registrata"
+
+#: app/base/routes.py:94
+msgid "User created please <a href=\"/login\">login</a>"
+msgstr "Utente creato per favore <a href=\"/login\"> accedi </a>"
+
+#: app/base/routes.py:113
+msgid "Server shutting down..."
+msgstr "Il server si sta spegnendo..."
+
+#: app/base/templates/base_site.html:28
+#: app/base/templates/base_site_auth.html:28
+#: app/base/templates/site_template/header-auth.html:9
+msgid "Hotel Admin Dashboard"
+msgstr "Dashboard di amministrazione dell'hotel"
+
+#: app/base/templates/login/login.html:3
+#: app/base/templates/login/register.html:80
+#: app/base/templates/site_template/navigation-auth.html:33
+msgid "Login"
+msgstr "Accesso"
+
+#: app/base/templates/login/login.html:20
+msgid "Don't have an account?"
+msgstr "Non hai un account?"
+
+#: app/base/templates/login/login.html:21
+msgid "Sign up"
+msgstr "Iscriviti"
+
+#: app/base/templates/login/login.html:61
+msgid "Sign in"
+msgstr "Sign in"
+
+#: app/base/templates/login/login.html:68
+msgid "Create new account"
+msgstr "Crea un nuovo account"
+
+#: app/base/templates/login/register.html:19
+#: app/base/templates/login/register.html:71
+#: app/base/templates/site_template/navigation-auth.html:39
+msgid "Register"
+msgstr "Registrati"
+
+#: app/base/templates/site_template/navigation.html:6
+msgid "Dashboard"
+msgstr "Pannello di controllo"
+
+#: app/base/templates/site_template/navigation.html:14
+msgid "Search"
+msgstr "Ricerca"
+
+#: app/base/templates/site_template/navigation.html:31
+msgid "Welcome!"
+msgstr "Benvenuto!"
+
+#: app/base/templates/site_template/navigation.html:35
+msgid "My profile"
+msgstr "Il mio profilo"
+
+#: app/base/templates/site_template/navigation.html:39
+#: app/home/templates/profile.html:95
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: app/base/templates/site_template/navigation.html:44
+#: app/base/templates/site_template/sidebar.html:105
+msgid "Logout"
+msgstr "Disconnettersi"
+
+#: app/base/templates/site_template/sidebar.html:5
+msgid "Product information"
+msgstr "Informazioni sul prodotto"
+
+#: app/base/templates/site_template/sidebar.html:11
+msgid ""
+"This is a hotel administration dashboard meant for managing your hotel "
+"information and photos. You can edit your user profile, manage your "
+"hotels, or logout."
+msgstr ""
+"Questa è una dashboard di amministrazione dell'hotel pensata per la "
+"gestione delle informazioni e delle foto dell'hotel. Puoi modificare il "
+"tuo profilo utente, gestire i tuoi hotel o disconnetterti."
+
+#: app/base/templates/site_template/sidebar.html:92
+msgid "User profile"
+msgstr "Profilo utente"
+
+#: app/base/templates/site_template/sidebar.html:97
+msgid "Your hotels"
+msgstr "I tuoi hotel"
+
+#: app/base/templates/site_template/sidebar.html:115
+msgid "Support"
+msgstr "Supporto"
+
+#: app/base/templates/site_template/sidebar.html:121
+msgid "Product Information"
+msgstr "Informazioni sul prodotto"
+
+#: app/home/forms.py:10 app/home/templates/profile.html:124
+msgid "Email address"
+msgstr "Indirizzo email"
+
+#: app/home/forms.py:11 app/home/templates/profile.html:134
+msgid "First name"
+msgstr "Nome di battesimo"
+
+#: app/home/forms.py:12 app/home/templates/profile.html:144
+msgid "Last name"
+msgstr "Cognome"
+
+#: app/home/forms.py:16
+msgid "Booking code ID"
+msgstr "ID codice prenotazione"
+
+#: app/home/forms.py:17
+msgid "Order ID"
+msgstr "ID ordine"
+
+#: app/home/forms.py:18
+msgid "Accommodation name"
+msgstr "Nome dell'alloggio"
+
+#: app/home/forms.py:19
+msgid "Structure rating"
+msgstr "Valutazione della struttura"
+
+#: app/home/forms.py:20
+msgid "Address (including city)"
+msgstr "Indirizzo (compresa la città)"
+
+#: app/home/forms.py:21
+msgid "CAP or ZIP code"
+msgstr "CAP"
+
+#: app/home/forms.py:22
+msgid "Town"
+msgstr "Cittadina"
+
+#: app/home/forms.py:23
+msgid "Geolocal Portal Code"
+msgstr "Codice portale geografico"
+
+#: app/home/forms.py:24
+msgid "Country"
+msgstr "Nazione"
+
+#: app/home/forms.py:25
+msgid "Hotel short description"
+msgstr "Breve descrizione dell'hotel"
+
+#: app/home/forms.py:26
+msgid "Arrival times"
+msgstr "Orari di arrivo"
+
+#: app/home/forms.py:27
+msgid "Departure times"
+msgstr "Orari di partenza"
+
+#: app/home/forms.py:28
+msgid "Location"
+msgstr "Posizione"
+
+#: app/home/forms.py:29
+msgid "Website"
+msgstr "Sito web"
+
+#: app/home/forms.py:30
+msgid "Phone"
+msgstr "Telefono"
+
+#: app/home/forms.py:31
+msgid "Number of stars"
+msgstr "Numero di stelle"
+
+#: app/home/forms.py:32
+msgid "Type of structure"
+msgstr "Tipo di struttura"
+
+#: app/home/routes.py:43 app/home/routes.py:110
+msgid "Changes successfully saved!"
+msgstr "Modifiche salvate correttamente!"
+
+#: app/home/routes.py:45 app/home/routes.py:112
+msgid "Failed to save changes! Please check below."
+msgstr "Impossibile salvare le modifiche! Si prega di controllare di seguito."
+
+#: app/home/routes.py:95
+msgid "Failed to upload cover image!"
+msgstr "Impossibile caricare l'immagine di copertina!"
+
+#: app/home/routes.py:128
+msgid "Failed to upload gallery image!"
+msgstr "Impossibile caricare l'immagine della galleria!"
+
+#: app/home/templates/edit_hotel.html:2
+msgid "Edit Hotel"
+msgstr "Edit Hotel"
+
+#: app/home/templates/edit_hotel.html:36
+msgid "Information"
+msgstr "Informazione"
+
+#: app/home/templates/edit_hotel.html:39
+msgid "Gallery"
+msgstr "Galleria"
+
+#: app/home/templates/edit_hotel.html:58
+#, python-format
+msgid "Hotel information - %(id)d"
+msgstr "Informazioni sull'albergo - %(id)d"
+
+#: app/home/templates/edit_hotel.html:154
+msgid "Hotel full description"
+msgstr "Descrizione completa dell'hotel"
+
+#: app/home/templates/edit_hotel.html:163
+msgid "Hotel services"
+msgstr "Servizi alberghieri"
+
+#: app/home/templates/edit_hotel.html:198
+msgid "Main mailing list"
+msgstr "Mailing list principale"
+
+#: app/home/templates/edit_hotel.html:202
+msgid "Secondary mailing list"
+msgstr "Mailing list secondaria"
+
+#: app/home/templates/edit_hotel.html:206
+msgid "Tertiary mailing list"
+msgstr "Mailing list terziaria"
+
+#: app/home/templates/edit_hotel.html:226
+msgid "Cover image"
+msgstr "Immagine di copertina"
+
+#: app/home/templates/edit_hotel.html:233
+msgid "Additional rules"
+msgstr "Regole aggiuntive"
+
+#: app/home/templates/edit_hotel.html:237
+msgid "Services (json)"
+msgstr "Servizi (json)"
+
+#: app/home/templates/edit_hotel.html:241
+msgid "Save edits"
+msgstr "Salva le modifiche"
+
+#: app/home/templates/edit_hotel.html:257
+msgid "Upload image"
+msgstr "Carica immagine"
+
+#: app/home/templates/edit_hotel.html:265
+msgid "Add image"
+msgstr "Aggiungi immagine"
+
+#: app/home/templates/hotels_select.html:3
+msgid "Select Hotel"
+msgstr "Seleziona Hotel"
+
+#: app/home/templates/hotels_select.html:24
+msgid "Hotels"
+msgstr "Alberghi"
+
+#: app/home/templates/hotels_select.html:48
+msgid "Associated hotels"
+msgstr "Alberghi associati"
+
+#: app/home/templates/hotels_select.html:55
+msgid "Your account is currently not linked to any hotels. Create one "
+msgstr "Il tuo account non è attualmente collegato ad alcun hotel. Crearne uno "
+
+#: app/home/templates/hotels_select.html:55
+msgid "here"
+msgstr "Qui"
+
+#: app/home/templates/hotels_select.html:57
+msgid "Create hotel"
+msgstr "Crea un hotel"
+
+#: app/home/templates/hotels_select.html:87
+#: app/home/templates/hotels_select.html:89
+msgid "Manage"
+msgstr "Gestire"
+
+#: app/home/templates/hotels_select.html:92
+#: app/home/templates/hotels_select.html:110
+msgid "Delete"
+msgstr "Elimina"
+
+#: app/home/templates/hotels_select.html:97
+msgid "Your attention is required"
+msgstr "È richiesta la tua attenzione"
+
+#: app/home/templates/hotels_select.html:105
+msgid "You should read this!"
+msgstr "Dovresti leggere questo!"
+
+#: app/home/templates/hotels_select.html:106
+#, python-format
+msgid ""
+"Deleting a hotel is irreversible. The hotel information and gallery will "
+"be deleted. Are you sure you want to delete the hotel \"%(name)s?\""
+msgstr ""
+"L'eliminazione di un hotel è irreversibile. Le informazioni e la galleria"
+" dell'hotel verranno eliminate. Sei sicuro di voler cancellare l'hotel "
+"\"%(name)s?\""
+
+#: app/home/templates/hotels_select.html:111
+msgid "Cancel"
+msgstr "Annulla"
+
+#: app/home/templates/profile.html:2
+msgid "Profile"
+msgstr "Profilo"
+
+#: app/home/templates/profile.html:16
+#, python-format
+msgid "Hello %(username)s"
+msgstr "Ciao %(username)s"
+
+#: app/home/templates/profile.html:18
+msgid ""
+"This is your profile page. You can edit your details and see the progress"
+" you have made with your work."
+msgstr ""
+"Questa è la pagina del tuo profilo. Puoi modificare i tuoi dettagli e "
+"vedere i progressi che hai fatto con il tuo lavoro."
+
+#: app/home/templates/profile.html:20
+msgid "Edit profile"
+msgstr "Modifica profilo"
+
+#: app/home/templates/profile.html:38
+msgid "Last login"
+msgstr "Ultimo accesso"
+
+#: app/home/templates/profile.html:59
+msgid "Superuser"
+msgstr "Superuser"
+
+#: app/home/templates/profile.html:61
+msgid "Enabled"
+msgstr "Abilitato"
+
+#: app/home/templates/profile.html:63
+msgid "Disabled"
+msgstr "Disabilitato"
+
+#: app/home/templates/profile.html:92
+msgid "My account"
+msgstr "Il mio account"
+
+#: app/home/templates/profile.html:112
+#, python-format
+msgid "User information - %(id)d"
+msgstr "Informazioni utente - %(id)d"
+
+#: app/home/templates/profile.html:156
+msgid "Language"
+msgstr "Linguaggio"
+

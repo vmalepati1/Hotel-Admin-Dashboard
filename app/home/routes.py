@@ -40,9 +40,9 @@ def edit_profile():
 
             db.session.commit()
         
-            return render_template('profile.html', success='Changes successfully saved!', form=edit_form)
+            return render_template('profile.html', success=_('Changes successfully saved!'), form=edit_form)
         else:
-            return render_template('profile.html', msg='Failed to save changes! Please check below.', form=edit_form)
+            return render_template('profile.html', msg=_('Failed to save changes! Please check below.'), form=edit_form)
     else:
         return render_template('profile.html', form=edit_form)
 
@@ -92,7 +92,7 @@ def edit_hotel(hotel_id):
                 
                 if file_ext.upper() not in (ext.upper() for ext in Config.UPLOAD_EXTENSIONS) or \
                         file_ext.upper() != validate_image(uploaded_file.stream).upper():
-                    return render_template('edit_hotel.html', msg='Failed to upload cover image!', hotel=hotel, form=edit_form)
+                    return render_template('edit_hotel.html', msg=_('Failed to upload cover image!'), hotel=hotel, form=edit_form)
 
                 filename = str(uuid.uuid4()) + file_ext
 
@@ -107,9 +107,9 @@ def edit_hotel(hotel_id):
 
             db.session.commit()
 
-            return render_template('edit_hotel.html', success='Changes successfully saved!', hotel=hotel, images=images, form=edit_form)
+            return render_template('edit_hotel.html', success=_('Changes successfully saved!'), hotel=hotel, images=images, form=edit_form)
         else:
-            return render_template('edit_hotel.html', msg='Failed to save changes! Please check below.', hotel=hotel, images=images, form=edit_form)
+            return render_template('edit_hotel.html', msg=_('Failed to save changes! Please check below.'), hotel=hotel, images=images, form=edit_form)
 
     elif 'delete_image' in request.form:
         image_to_delete = Images.query.filter_by(id=request.form['delete_image']).first()
@@ -125,7 +125,7 @@ def edit_hotel(hotel_id):
             
             if file_ext.upper() not in (ext.upper() for ext in Config.UPLOAD_EXTENSIONS) or \
                     file_ext.upper() != validate_image(uploaded_file.stream).upper():
-                return render_template('edit_hotel.html', msg='Failed to upload gallery image!', hotel=hotel, images=images, form=edit_form)
+                return render_template('edit_hotel.html', msg=_('Failed to upload gallery image!'), hotel=hotel, images=images, form=edit_form)
 
             filename = str(uuid.uuid4()) + file_ext
 

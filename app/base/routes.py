@@ -4,7 +4,7 @@ License: MIT
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from flask import jsonify, render_template, redirect, request, url_for
+from flask import jsonify, render_template, redirect, request, url_for, abort
 from flask_login import (
     current_user,
     login_required,
@@ -52,7 +52,7 @@ def login():
             return redirect(url_for('base_blueprint.route_default'))
 
         # Something (user or pass) is not ok
-        return render_template( 'login/login.html', msg='Wrong user or password', form=login_form)
+        return render_template( 'login/login.html', msg=_('Wrong user or password'), form=login_form)
 
     if not current_user.is_authenticated:
         return render_template( 'login/login.html',
@@ -69,11 +69,11 @@ def create_user():
 
         user = Users.query.filter_by(username=username).first()
         if user:
-            return render_template( 'login/register.html', msg='Username already registered', form=create_account_form)
+            return render_template( 'login/register.html', msg=_('Username already registered'), form=create_account_form)
 
         user = Users.query.filter_by(email=email).first()
         if user:
-            return render_template( 'login/register.html', msg='Email already registered', form=create_account_form)
+            return render_template( 'login/register.html', msg=_('Email already registered'), form=create_account_form)
 
         attrs = dict(request.form)
         attrs['salt'] = bcrypt.gensalt().decode() 
@@ -89,10 +89,9 @@ def create_user():
         # else we can create the user
         user = Users(**attrs)
         db.session.add(user)
-        print('Committed')
         db.session.commit()
 
-        return render_template( 'login/register.html', success='User created please <a href="/login">login</a>', form=create_account_form)
+        return render_template( 'login/register.html', success=_('User created please <a href="/login">login</a>'), form=create_account_form)
     else:
         return render_template( 'login/register.html', form=create_account_form)
 
@@ -104,11 +103,14 @@ def logout():
 
 @blueprint.route('/shutdown')
 def shutdown():
+    if not current_user.is_admin:
+        abort(403)
+        
     func = request.environ.get('werkzeug.server.shutdown')
     if func is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
-    return 'Server shutting down...'
+    return _('Server shutting down...')
 
 ## Errors
 
