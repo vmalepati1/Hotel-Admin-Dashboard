@@ -5,6 +5,7 @@
 {% endblock stylesheets %}
 {% block content %}
 {% include "site_template/navigation.html" %}
+{% from "site_template/_formhelpers.html" import render_errors %}
 <!-- Header -->
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
    <div class="container-fluid">
@@ -29,7 +30,7 @@
       <div class="col-xl-8 order-xl-1">
          <div class="card bg-secondary shadow">
             <div class="card-header bg-white border-0">
-               <div class="nav-wrapper">
+               <div class="nav-wrapper" id="myTab">
                   <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                      <li class="nav-item">
                         <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-bullet-list-67 mr-2"></i>Information</a>
@@ -43,9 +44,7 @@
             <div class="card-body">
                <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                     <form method="post" action="">
-                        {% from "site_template/_formhelpers.html" import render_errors %}
-						
+                     <form method="post" action="" enctype="multipart/form-data">
 						{{ form.hidden_tag() }}
 						
 						<div class="text-muted text-center">
@@ -69,7 +68,11 @@
                               <div class="col-lg-6">
                                  <div class="form-group">
                                     <label class="form-control-label">{{ form.order_id.label }}</label>
+									{% if hotel.order_id %}
                                     {{ form.order_id(value=hotel.order_id, class="form-control") }}
+									{% else %}
+									{{ form.order_id(value=0, class="form-control") }}
+									{% endif %}
                                     {{ render_errors(form.order_id) }}
                                  </div>
                               </div>
@@ -149,7 +152,7 @@
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Hotel full description</label>
-                              <textarea class="form-control">{{ hotel.hotel_description }}</textarea>
+                              <textarea class="form-control" name="hotel_description">{{ hotel.hotel_description }}</textarea>
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">{{ form.hotel_smalldesc.label }}</label>
@@ -158,7 +161,7 @@
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Hotel services</label>
-                              <textarea class="form-control">{{ hotel.hotel_services }}</textarea>
+                              <textarea class="form-control" name="hotel_services">{{ hotel.hotel_services }}</textarea>
                            </div>
                            <div class="row">
                               <div class="col-lg-6">
@@ -193,15 +196,15 @@
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Main mailing list</label>
-                              <textarea class="form-control">{{ hotel.mails1 }}</textarea>
+                              <textarea class="form-control" name="mails1" >{{ hotel.mails1 }}</textarea>
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Secondary mailing list</label>
-                              <textarea class="form-control">{{ hotel.mails2 }}</textarea>
+                              <textarea class="form-control" name="mails2">{{ hotel.mails2 }}</textarea>
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Tertiary mailing list</label>
-                              <textarea class="form-control">{{ hotel.mails3 }}</textarea>
+                              <textarea class="form-control" name="mails3">{{ hotel.mails3 }}</textarea>
                            </div>
                            <div class="row">
                               <div class="col-lg-6">
@@ -223,16 +226,16 @@
                               <label class="form-control-label">Cover image</label>
                               <input class="form-control" type="file"
                                  name="cover_image_file"
-                                 accept="image/*">
+                                 accept="image/x-png,image/gif,image/jpeg">
                               </input>
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Additional rules</label>
-                              <textarea class="form-control">{{ hotel.additional_rules }}</textarea>
+                              <textarea class="form-control" name="additional_rules">{{ hotel.additional_rules }}</textarea>
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Services (json)</label>
-                              <textarea class="form-control">{{ hotel.services }}</textarea>
+                              <textarea class="form-control" name="services">{{ hotel.services }}</textarea>
                            </div>
 						    <div class="text-center">
 								<button type="submit" name="save" class="btn btn-primary my-4">Save edits</button>
@@ -241,7 +244,42 @@
                      </form>
                   </div>
                   <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
-                     <p class="description">Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                     <form method="post" action="" enctype="multipart/form-data">
+						{{ form.hidden_tag() }}
+						
+						<div class="text-muted text-center">
+							{% if msg %}
+								<span class="text-danger">{{ msg | safe }}</span>
+							{% endif %}
+						</div>
+						
+						<div class="form-group">
+                              <label class="form-control-label">Upload image</label>
+                              <input class="form-control" type="file"
+                                 name="gallery_image_file"
+                                 accept="image/x-png,image/gif,image/jpeg">
+                              </input>
+                        </div>
+						<button name="add_image" class="btn btn-icon btn-primary btn-block mb-4" type="submit" style="align-items: stretch;">
+							<span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+							<span class="btn-inner--text">Add image</span>
+						</button>
+					 </form>
+						<div class="row text-center text-lg-left">
+							{% for image in images %}
+							  	<div class="col-lg-6 col-md-4 col-6 mb-4">
+								  <a href="{{ image.filepath }}" class="d-block h-200">
+									<img class="img-fluid img-thumbnail" src="{{ image.filepath }}" alt="">
+								  </a>
+								  
+								  <form role="form" method="post" action="">
+									  <button name="delete_image" class="btn btn-icon btn-danger btn-sm" type="submit" value="{{ image.id }}" style="position: absolute; top: 0px; right: 15px; z-index: 100;">
+										<span class="btn-inner--icon"><i class="ni ni-fat-remove"></i></span>
+									  </button>
+								  </form>
+								</div>
+							{% endfor %}
+						</div>
                   </div>
                </div>
             </div>
@@ -253,4 +291,18 @@
 {% endblock content %}
 {% block javascripts %}
 {{ super()}}
+<script>
+$(document).ready(function() {
+    if (location.hash) {
+        $("a[href='" + location.hash + "']").tab("show");
+    }
+    $(document.body).on("click", "a[data-toggle='tab']", function(event) {
+        location.hash = this.getAttribute("href");
+    });
+});
+$(window).on("popstate", function() {
+    var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+    $("a[href='" + anchor + "']").tab("show");
+});
+</script>
 {% endblock javascripts %}

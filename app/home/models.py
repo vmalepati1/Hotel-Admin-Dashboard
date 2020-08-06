@@ -32,3 +32,10 @@ class Hotel(db.Model):
     cover_image = Column(String(200))
     additional_rules = Column(MEDIUMTEXT)
     services = Column(MEDIUMTEXT)
+
+class Images(db.Model):
+
+    id = Column(Integer, primary_key=True, nullable=False, unique=True, autoincrement=True)
+    hotel_id1 = Column(String(50))
+    filepath = Column(String(255))
+    hotel_id = Column(Integer, nullable=False)

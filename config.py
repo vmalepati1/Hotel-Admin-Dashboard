@@ -28,9 +28,11 @@ class Config(object):
     # DEFAULT_THEME = "themes/dark"
     DEFAULT_THEME = None
 
-    MAX_CONTENT_LENGTH = 1024 * 1024
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     UPLOAD_EXTENSIONS = ['.jpg', '.png', '.gif']
-    UPLOAD_PATH = 'app/base/static/assets/img'
+
+    UPLOAD_FILE_PATH = 'app/base/static/assets/img/uploads'
+    UPLOAD_STATIC_FOLDER_PATH = 'assets/img/uploads'
 
 class ProductionConfig(Config):
     DEBUG = False

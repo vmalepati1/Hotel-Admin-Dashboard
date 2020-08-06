@@ -52,7 +52,9 @@
 				<div class="text-muted text-center mt-1 mb-2">
               
 				{% if num_hotels == 0 %}
-				<span class="text-info">Your account is currently not linked to any hotels.</span>
+					<span class="text-info">Your account is currently not linked to any hotels. Create one <a href="{{ url_for('home_blueprint.create_hotel') }}" class="button">here</a></span>
+				{% elif current_user.is_admin %}
+					<a href="{{ url_for('home_blueprint.create_hotel') }}" class="button">Create hotel</a>
 				{% endif %}
 				
 				<!--
@@ -81,12 +83,13 @@
 							  </div>
 							  <div class="text-center">
 								<form role="form" method="post" action="">
-									<button type="submit" class="btn btn-primary my-4">Manage</button>
 									{% if current_user.is_admin %}
-									
-										  <button type="button" class="btn btn-icon btn-danger" type="submit" data-toggle="modal" data-target="#modal-notification_{{hotel.seq_id}}">
-											<span class="btn-inner--icon"><i class="ni ni-fat-remove"></i></span>
-										  </button>
+										<a href="{{ url_for('home_blueprint.edit_hotel', hotel_id=hotel.seq_id) }}" class="button" style="display:block;">Manage</a>
+									{% else %}
+										<a href="{{ url_for('home_blueprint.edit_hotel', hotel_id=hotel.seq_id) }}" class="button mb-2" style="display:block;">Manage</a>
+									{% endif %}	
+									{% if current_user.is_admin %}
+										  <a href="#" class="button mb-2" style="display:block;" data-toggle="modal" data-target="#modal-notification_{{hotel.seq_id}}">Delete</a>
 										  <div class="modal fade" id="modal-notification_{{hotel.seq_id}}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
 											 <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
 												<div class="modal-content bg-gradient-danger">
